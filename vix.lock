@@ -1,0 +1,13 @@
+{
+  "dependencies": [
+    {
+      "commit": "f3dd246df3d02267528381e78f1fb4c7f0632e93",
+      "hash": "b22c3ef5e247d951b9bbde6565d802c371d2449d98f3d517e2095fb82881ffa0",
+      "id": "cnerium/http",
+      "repo": "https://github.com/cnerium/http",
+      "tag": "v0.1.1",
+      "version": "0.1.1"
+    }
+  ],
+  "lockVersion": 1
+}

@@ -1,17 +1,22 @@
 {
   "name": "router",
-  "namespace": "gaspardkirira",
+  "namespace": "cnerium",
   "version": "0.1.0",
   "type": "header-only",
   "include": "include",
   "license": "MIT",
-  "description": "Lightweight and fast routing system for HTTP request handling in Cnerium.",
+  "description": "Fast and minimal HTTP router for the Cnerium web framework. Provides path routing, method matching and handler dispatch.",
   "keywords": [
-    "cpp",
-    "header-only",
-    "vix"
+    "http",
+    "router",
+    "web",
+    "framework",
+    "cnerium",
+    "vix",
+    "backend",
+    "routing"
   ],
-  "repository": "https://github.com/Gaspardkirira/router",
+  "repository": "https://github.com/cnerium/router",
   "authors": [
     {
       "name": "Gaspard Kirira",
