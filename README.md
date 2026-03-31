@@ -1,2 +1,7 @@
 # router
-Lightweight and fast routing system for HTTP request handling in Cnerium.
+
+Header-only C++ library scaffold.
+
+```bash
+vix tests
+```

@@ -1,0 +1,21 @@
+{
+  "name": "router",
+  "namespace": "gaspardkirira",
+  "version": "0.1.0",
+  "type": "header-only",
+  "include": "include",
+  "license": "MIT",
+  "description": "Lightweight and fast routing system for HTTP request handling in Cnerium.",
+  "keywords": [
+    "cpp",
+    "header-only",
+    "vix"
+  ],
+  "repository": "https://github.com/Gaspardkirira/router",
+  "authors": [
+    {
+      "name": "Gaspard Kirira",
+      "github": "Gaspardkirira"
+    }
+  ]
+}
