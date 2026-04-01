@@ -11,8 +11,8 @@ include(GNUInstallDirs)
 # ========================
 # Options
 # ========================
-option(CNERIUM_ROUTER_BUILD_TESTS "Build router tests" ON)
-option(CNERIUM_ROUTER_BUILD_EXAMPLES "Build router examples" ON)
+option(CNERIUM_ROUTER_BUILD_TESTS "Build router tests" OFF)
+option(CNERIUM_ROUTER_BUILD_EXAMPLES "Build router examples" OFF)
 
 # ========================
 # Global settings
@@ -28,7 +28,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.vix/vix_deps.cmake")
     include("${CMAKE_CURRENT_SOURCE_DIR}/.vix/vix_deps.cmake")
 endif()
 
-if(NOT TARGET cnerium::http AND NOT TARGET cnerium_http)
+if(NOT TARGET cnerium::http
+   AND NOT TARGET cnerium_http
+   AND NOT TARGET http::http
+   AND NOT TARGET http)
     find_package(cnerium_http CONFIG QUIET)
     find_package(http CONFIG QUIET)
 endif()
@@ -38,6 +41,10 @@ if(TARGET cnerium::http)
     set(CNERIUM_ROUTER_HTTP_TARGET cnerium::http)
 elseif(TARGET cnerium_http)
     set(CNERIUM_ROUTER_HTTP_TARGET cnerium_http)
+elseif(TARGET http::http)
+    set(CNERIUM_ROUTER_HTTP_TARGET http::http)
+elseif(TARGET http)
+    set(CNERIUM_ROUTER_HTTP_TARGET http)
 endif()
 
 if(CNERIUM_ROUTER_HTTP_TARGET STREQUAL "")
