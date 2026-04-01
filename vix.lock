@@ -1,12 +1,12 @@
 {
   "dependencies": [
     {
-      "commit": "9166663aa127b18ed0356adae97b3987f0aba462",
-      "hash": "24e69142e494cfd9694a089535ff75fe5df62c166bc1a6fc4e6230f12c5ac365",
+      "commit": "40270e6ae0127858a84f9905bfe037c7cf7baa05",
+      "hash": "213495b6bc272a1886d8fcff235fe0031eee9ec9d9e093a15959415aaebcd5a8",
       "id": "cnerium/http",
       "repo": "https://github.com/cnerium/http",
-      "tag": "v0.4.0",
-      "version": "0.4.0"
+      "tag": "v0.6.0",
+      "version": "0.6.0"
     },
     {
       "commit": "ccb8b3faa3b2e4e9482f6329279279bced595429",
