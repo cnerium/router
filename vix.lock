@@ -1,12 +1,20 @@
 {
   "dependencies": [
     {
-      "commit": "f3dd246df3d02267528381e78f1fb4c7f0632e93",
-      "hash": "b22c3ef5e247d951b9bbde6565d802c371d2449d98f3d517e2095fb82881ffa0",
+      "commit": "af235330530d298e86018a77726d130d781f2dd5",
+      "hash": "7aac47f5f78d6120284a3e659de6e954ffafb4ad64bc30e1b8214e3ddc46373c",
       "id": "cnerium/http",
       "repo": "https://github.com/cnerium/http",
-      "tag": "v0.1.1",
-      "version": "0.1.1"
+      "tag": "v0.2.0",
+      "version": "0.2.0"
+    },
+    {
+      "commit": "7d953a819951563efd9ecaf16c7d0b8f0125563f",
+      "hash": "b0f2c05e62fed5555543000321531e2d46320cbca7a8562adb179228d2e040de",
+      "id": "cnerium/json",
+      "repo": "https://github.com/cnerium/json",
+      "tag": "v0.2.0",
+      "version": "0.2.0"
     }
   ],
   "lockVersion": 1
