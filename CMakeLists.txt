@@ -28,16 +28,13 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.vix/vix_deps.cmake")
     include("${CMAKE_CURRENT_SOURCE_DIR}/.vix/vix_deps.cmake")
 endif()
 
-find_package(cnerium_http CONFIG QUIET)
-find_package(http CONFIG QUIET)
+if(NOT TARGET cnerium::http AND NOT TARGET cnerium_http)
+    find_package(cnerium_http CONFIG QUIET)
+    find_package(http CONFIG QUIET)
+endif()
 
 set(CNERIUM_ROUTER_HTTP_TARGET "")
-
-if(TARGET http::http)
-    set(CNERIUM_ROUTER_HTTP_TARGET http::http)
-elseif(TARGET http)
-    set(CNERIUM_ROUTER_HTTP_TARGET http)
-elseif(TARGET cnerium::http)
+if(TARGET cnerium::http)
     set(CNERIUM_ROUTER_HTTP_TARGET cnerium::http)
 elseif(TARGET cnerium_http)
     set(CNERIUM_ROUTER_HTTP_TARGET cnerium_http)
@@ -46,7 +43,6 @@ endif()
 if(CNERIUM_ROUTER_HTTP_TARGET STREQUAL "")
     message(FATAL_ERROR
         "cnerium http target not found.\n"
-        "Tried: http::http, http, cnerium::http, cnerium_http\n"
         "Install dependencies with Vix:\n"
         "  vix add @cnerium/http\n"
         "  vix install"
@@ -56,34 +52,35 @@ endif()
 # ========================
 # Library (header-only)
 # ========================
-add_library(router INTERFACE)
-add_library(router::router ALIAS router)
+add_library(cnerium_router INTERFACE)
+add_library(cnerium::router ALIAS cnerium_router)
 
-target_compile_features(router INTERFACE cxx_std_20)
+target_compile_features(cnerium_router INTERFACE cxx_std_20)
 
-target_link_libraries(router
+target_link_libraries(cnerium_router
     INTERFACE
         ${CNERIUM_ROUTER_HTTP_TARGET}
 )
 
-target_include_directories(router INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+target_include_directories(cnerium_router
+    INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 # ========================
 # Compiler options
 # ========================
 if(MSVC)
-    target_compile_options(router INTERFACE /W4 /permissive-)
+    target_compile_options(cnerium_router INTERFACE /W4 /permissive-)
 else()
-    target_compile_options(router INTERFACE -Wall -Wextra -Wpedantic)
+    target_compile_options(cnerium_router INTERFACE -Wall -Wextra -Wpedantic)
 endif()
 
 # ========================
 # Target properties
 # ========================
-set_target_properties(router PROPERTIES
+set_target_properties(cnerium_router PROPERTIES
     EXPORT_NAME router
 )
 
@@ -102,9 +99,17 @@ if(CNERIUM_ROUTER_BUILD_TESTS)
     enable_testing()
 
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_basic.cpp")
-        add_executable(router_basic_test tests/test_basic.cpp)
-        target_link_libraries(router_basic_test PRIVATE router::router)
-        add_test(NAME router.basic COMMAND router_basic_test)
+        add_executable(cnerium_router_test_basic tests/test_basic.cpp)
+        target_link_libraries(cnerium_router_test_basic PRIVATE cnerium::router)
+        target_compile_features(cnerium_router_test_basic PRIVATE cxx_std_20)
+
+        if(MSVC)
+            target_compile_options(cnerium_router_test_basic PRIVATE /W4 /permissive-)
+        else()
+            target_compile_options(cnerium_router_test_basic PRIVATE -Wall -Wextra -Wpedantic)
+        endif()
+
+        add_test(NAME cnerium_router.basic COMMAND cnerium_router_test_basic)
     endif()
 endif()
 
@@ -112,7 +117,7 @@ endif()
 # Summary
 # ========================
 message(STATUS "------------------------------------------------------")
-message(STATUS "cnerium router configured (${PROJECT_VERSION})")
+message(STATUS "cnerium::router configured (${PROJECT_VERSION})")
 message(STATUS "HTTP target:     ${CNERIUM_ROUTER_HTTP_TARGET}")
 message(STATUS "Include dir:     ${CMAKE_CURRENT_SOURCE_DIR}/include")
 message(STATUS "Build tests:     ${CNERIUM_ROUTER_BUILD_TESTS}")
